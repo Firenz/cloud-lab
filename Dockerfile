@@ -25,4 +25,4 @@ RUN npm install
 # Expose working port
 EXPOSE 8888
 
-ENTRYPOINT ["npm", "start"]
+CMD ["npm", "start"]
