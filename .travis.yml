@@ -1,5 +1,10 @@
 
+sudo: required
 services:
   - docker
 scripts:
-  - docker build -t lemoncode-docker-exercise .
+  - docker build -t cloud .
+after_success:
+  - docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
+  - docker tag cloud $DOCKER_USER/lemoncode-docker-exercise
+  - docker push $DOCKER_USER/lemoncode-docker-exercise
