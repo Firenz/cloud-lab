@@ -1,7 +1,5 @@
 FROM ubuntu:18.04
 
-STOPSIGNAL SIGKILL
-
 COPY . .
 
 # Update container and install needed commands
