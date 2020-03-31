@@ -2,6 +2,10 @@ provider "aws" {
   region = "us-east-2"
 }
 
+data "template_file" "start_script" {
+  template = "${file("./script.sh")}"
+}
+
 resource "aws_security_group" "server_sg" {
   name = "server-security-group"
 
@@ -36,6 +40,7 @@ resource "aws_instance" "server" {
   instance_type = "t2.micro"
   vpc_security_group_ids = [aws_security_group.server_sg.id]
   key_name = "lemoncode"
+  user_data = data.template_file.start_script.rendered
 }
 
 output "serverIp" {
